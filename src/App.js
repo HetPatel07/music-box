@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import Signin from "./Components/Signin/Signin";
+import Register from "./Components/Register/Register";
+import Home from "./Components/Dashboard/Home";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      route : 'signin', 
+      isSignedIn: false,
+      user: []
+    }
+  }
+  onRouteChange = async (route,user) => {
+    if (route === 'signout') {
+      this.setState({isSignedIn: false,route: 'signin'})
+      return;      
+    } else if (route === 'home') {            
+      await this.setState({isSignedIn: true, user: user})
+    }
+    this.setState({route : route})
+  }
+
+  render() {    
+    return (
+      <div className="App">
+      {
+        this.state.route === 'signin' ? 
+        <Signin onRouteChange = {this.onRouteChange}/> :
+          this.state.route === 'home' ? <Home user = {this.state.user} onRouteChange = {this.onRouteChange}/> :
+          <Register onRouteChange = {this.onRouteChange} onRegisterBtnClick = {this.onRegisterBtnClick} />
+      }
+      </div>
+    );
+  }
 }
 
 export default App;
