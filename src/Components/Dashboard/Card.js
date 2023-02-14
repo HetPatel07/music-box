@@ -27,7 +27,7 @@ const Card = ({ track, userid,show,onHomeRouteChange}) => {
         // Error
         if (error.response) {
           // this.setState({msg : error.response.data})
-          console.log(this.state);
+          // console.log(this.state);
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the

@@ -67,7 +67,7 @@ class Register extends React.Component {
                 </label>
                 <input
                   onChange={this.onEmailChange}
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="pa2 input-reset ba   hover-bg-black hover-white w-100"
                   type="email"
                   name="email"
                   id="email-address"
@@ -78,7 +78,7 @@ class Register extends React.Component {
                   Password
                 </label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="b pa2 input-reset ba hover-bg-black hover-white w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -90,7 +90,7 @@ class Register extends React.Component {
                   Confirm Password
                 </label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="b pa2 input-reset ba hover-bg-black hover-white w-100"
                   type="password"
                   name="confirmPassword"
                   id="password"

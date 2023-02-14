@@ -1,11 +1,58 @@
-Create table favourites (
-	id varchar(255) primary key,
-	name varchar(255) not null,
-	artistname varchar(255) not null,
-	imgurl varchar(255) not null,
-	uri varchar(255) not null,
-	userId int not null,
-	 CONSTRAINT fk_favs
-      FOREIGN KEY(userId) 
-	  REFERENCES users(userid)
+-- Database: musicbox
+
+-- DROP DATABASE IF EXISTS musicbox;
+
+CREATE DATABASE musicbox
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_India.1252'
+    LC_CTYPE = 'English_India.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+
+-- Table: public.users
+
+-- DROP TABLE IF EXISTS public.users;
+
+CREATE TABLE IF NOT EXISTS public.users
+(
+    userid integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    email character varying(255) COLLATE pg_catalog."default",
+    hashpass character(60) COLLATE pg_catalog."default",
+    CONSTRAINT users_pkey PRIMARY KEY (userid),
+    CONSTRAINT user_unique UNIQUE (email)
 )
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.users
+    OWNER to postgres;
+
+
+-- Table: public.favourites
+
+-- DROP TABLE IF EXISTS public.favourites;
+
+CREATE TABLE IF NOT EXISTS public.favourites
+(
+    id character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    artistname character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    imgurl character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    uri character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    userid integer NOT NULL,
+    CONSTRAINT favourites_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_favs FOREIGN KEY (userid)
+        REFERENCES public.users (userid) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.favourites
+    OWNER to postgres;
